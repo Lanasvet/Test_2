@@ -1,0 +1,44 @@
+﻿@model Parser.Models.TextModel
+
+<div class="jumbotron">
+    <h1>PARSER</h1>
+    <p>
+        The following is a small coding exercise.
+        It is a working program that can convert text into either XML format-ted data or comma separated (CSV) data.
+        This program parse text, break it up into sentences and words and sort the words.
+    </p>
+</div>
+<div class="row">    
+        @using (Html.BeginForm("", "api/Parser", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+        Html.AntiForgeryToken();
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Text, new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(m => m.Text, 10, 400, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-offset-6 col-md-2">
+            <div class="form-group">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(m => m.IsXML, "true")
+                    В XML формат
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(m => m.IsXML, "false")
+                    В CSV формат
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-2">
+                <button type="submit" class="btn btn-block btn-lg btn-primary" >Parse</button>
+            </div>
+        </div>
+        }
+</div>
